@@ -30,6 +30,17 @@ li:hover {
   background-color: #ddd;
 }
 
+.nicknames-list-item {
+  border-bottom: none;
+  line-height: inherit;
+  text-align: start;
+}
+
+.nicknames-list-item:hover {
+  cursor: auto;
+  background-color: inherit;
+}
+
 .active {
   background-color: #cde;
 }

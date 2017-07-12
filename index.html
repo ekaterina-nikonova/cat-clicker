@@ -14,12 +14,23 @@
     <main>
       <section class="cat-list"></section>
       <section class="main">
-        <div class="pre-title">
-          Choose a kitty in the list
+        <div class="img-container">
+          <img src="" class="cat-image" data-bind="click: incrementClicks, attr: {src: currentCat().sprite}">
+        </div>
+        <div class="container">
+          <div class="name" data-bind="text: currentCat().catTitle"></div>
+          <div class="currentCat().clicks" data-bind="text: currentCat().clickCount"></div>
+          <div class="nicknames">
+            <h4 data-bind="text: currentCat().nicknames.title"></h4>
+            <ul class="nicknames-list" data-bind="foreach: currentCat().nicknames.names">
+              <li class="nicknames-list-item" data-bind="text: $data"></li>
+            </ul>
+          </div>
         </div>
       </section>
     </main>
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script defer src="js/main.js"></script>
   </body>
 </html>
