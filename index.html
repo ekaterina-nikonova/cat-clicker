@@ -12,17 +12,21 @@
       <h1>Click a kitty</h1>
     </header>
     <main>
-      <section class="cat-list"></section>
-      <section class="main">
+      <section class="cat-list">
+        <ul data-bind="foreach: catList">
+          <li data-bind="text: catName, click: $parent.pickName"></li>
+        </ul>
+      </section>
+      <section class="main" data-bind="with: currentCat">
         <div class="img-container">
-          <img src="" class="cat-image" data-bind="click: incrementClicks, attr: {src: currentCat().sprite}">
+          <img src="" class="cat-image" data-bind="click: $parent.incrementClicks, attr: {src: sprite}">
         </div>
         <div class="container">
-          <div class="name" data-bind="text: currentCat().catTitle"></div>
-          <div class="currentCat().clicks" data-bind="text: currentCat().clickCount"></div>
+          <div class="name" data-bind="text: catTitle"></div>
+          <div class="clicks" data-bind="text: clickCount"></div>
           <div class="nicknames">
-            <h4 data-bind="text: currentCat().nicknames.title"></h4>
-            <ul class="nicknames-list" data-bind="foreach: currentCat().nicknames.names">
+            <h4 data-bind="text: nicknames.title"></h4>
+            <ul class="nicknames-list" data-bind="foreach: nicknames.names">
               <li class="nicknames-list-item" data-bind="text: $data"></li>
             </ul>
           </div>

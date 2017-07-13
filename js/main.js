@@ -41,12 +41,12 @@ var allCats = [
       {name: 'Sukkerspinn', sprite: 'img/white-cat.jpg'}
     ];
 
-var Cat = function(index) {
+var Cat = function(cat) {
   this.clicks = ko.observable(0);
   this.clickCount = ko.computed(function() {
     return 'Clicks: ' + this.clicks();
   }, this);
-  this.catName = allCats[index].name;
+  this.catName = cat.name;
   this.level = ko.computed(function() {
     if (this.clicks() < 10) {
       return 'Newborn';
@@ -63,16 +63,24 @@ var Cat = function(index) {
   this.catTitle = ko.computed(function() {
     return (this.catName + ', ' + this.level());
   }, this);
-  this.sprite = allCats[index].sprite;
+  this.sprite = cat.sprite;
   this.nicknames = {
     title: 'Nicknames:',
-    names: allCats[index].nicknames};
+    names: cat.nicknames};
 };
 
 var ViewModel = function() {
-  this.currentCat = ko.observable(new Cat(0));
+  var self = this;
+  this.catList = ko.observableArray([]);
+  allCats.forEach(function(cat) {
+    self.catList.push(new Cat(cat));
+  });
+  this.currentCat = ko.observable(self.catList()[0]);
+  this.pickName = function(picked) {
+    self.currentCat(picked);
+  };
   this.incrementClicks = function() {
-    this.currentCat().clicks(this.currentCat().clicks() + 1);
+    this.clicks(this.clicks() + 1); //this represents the binding context (currentCat)
   };
 };
 
